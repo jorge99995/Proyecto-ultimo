@@ -15,11 +15,15 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->bigIncrements('usu_id');
+            $table->string('usu_nombres');
+            $table->string('email')->unique();
             $table->string('usu_apellidos');
             $table->string('usu_telefono');
             $table->string('usu_contraseña');
+            // $table->unsignedBigInteger('perf_id');
 
-            $table->foreignId('per_id')->references('per_id')->on('perfils')->onDelete('cascade');
+            // $table->foreign('perf_id')->nullable()->references('per_id')->on('perfils');
+            // $table->foreignId('per_id')->references('per_id')->on('perfils')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -43,4 +43,6 @@ Route::controller(UsuarioController::class)->group(function () {
 
     Route::get('/login', 'login')->name('login');
     Route::get('/register', 'register')->name('register');
+    Route::post('create', 'create')->name('auth.create');
+    Route::post('iniciarSesion', 'iniciarSesion')->name('auth.iniciarSesion');
 });
