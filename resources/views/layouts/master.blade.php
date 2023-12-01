@@ -163,7 +163,8 @@
                     <div class="dropdown-menu">
                         <div class="user-header">
                             <div class="avatar avatar-sm">
-                                <img src="" alt="{{ Session::get('name') }}" class="avatar-img rounded-circle">
+                                <img src="" alt="{{ Session::get('usu_nombres') }}" class="avatar-img rounded-circle">
+
                             </div>
                             <div class="user-text">
                                 <h6>{{ Session::get('name') }}</h6>
@@ -172,7 +173,7 @@
                         </div>
                         <a class="dropdown-item" href="">My Profile</a>
                         <a class="dropdown-item" href="inbox.html">Inbox</a>
-                        <a class="dropdown-item" href="">Logout</a>
+                        <a class="dropdown-item" href="{{ route('auth.logout') }}">Logout</a>
                     </div>
                 </li>
             </ul>

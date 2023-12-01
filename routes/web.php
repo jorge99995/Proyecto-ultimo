@@ -27,22 +27,32 @@ function set_active($route)
     return Request::path() == $route ? 'active' : '';
 }
 Route::get('/', function () {
-    return view('layouts.master');
-});
-
-Route::controller(HomeController::class)->group(function () {
-
-    Route::get('/home', 'index')->name('home');
-    Route::get('user/profile/page', 'userProfile')->name('user/profile/page');
-    Route::get('teacher/dashboard', 'teacherDashboardIndex')->name('teacher/dashboard');
-    Route::get('student/dashboard', 'studentDashboardIndex')->name('student/dashboard');
+    return view('auth.login');
 });
 
 
-Route::controller(UsuarioController::class)->group(function () {
 
-    Route::get('/login', 'login')->name('login');
-    Route::get('/register', 'register')->name('register');
-    Route::post('create', 'create')->name('auth.create');
-    Route::post('iniciarSesion', 'iniciarSesion')->name('auth.iniciarSesion');
+
+
+Route::group(['middleware' => ['Authcheck']], function () {
+
+    Route::get('/login', [UsuarioController::class, 'login'])->name('login');
+    Route::get('/register', [UsuarioController::class, 'register'])->name('register');
+    Route::get('create', [UsuarioController::class, 'create'])->name('auth.create');
+    Route::post('iniciarSesion', [UsuarioController::class, 'iniciarSesion'])->name('auth.iniciarSesion');
+    Route::get('logout', [UsuarioController::class, 'logout'])->name('auth.logout');
+
+
+
+
+
+
+
+    Route::controller(HomeController::class)->group(function () {
+
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::get('user/profile/page', [HomeController::class, 'userProfile'])->name('user/profile/page');
+        Route::get('teacher/dashboard', [HomeController::class, 'teacherDashboardIndex'])->name('teacher/dashboard');
+        Route::get('student/dashboard', [HomeController::class, 'studentDashboardIndex'])->name('student/dashboard');
+    });
 });

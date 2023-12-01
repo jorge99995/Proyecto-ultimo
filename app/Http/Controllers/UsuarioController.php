@@ -66,4 +66,14 @@ class UsuarioController extends Controller
 
         return response()->json(['valido' => $valido]);
     }
+
+    public function logout()
+    {
+        if (session()->has('LoginUsuario')) {
+
+            session()->pull('LoginUsuario');
+
+            return redirect('login');
+        }
+    }
 }
